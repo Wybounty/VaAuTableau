@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Inertia\Response;
 use Inertia\Inertia;
+use App\Models\Eleve;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -18,6 +20,9 @@ class HomeController extends Controller
 
     public function dashboard() : Response
     {
-        return Inertia::render('Dashboard');
+        $eleves = Eleve::where('user_id', Auth::id())->get();
+
+
+        return Inertia::render('Dashboard', ['eleves' => $eleves]);
     }
 }
