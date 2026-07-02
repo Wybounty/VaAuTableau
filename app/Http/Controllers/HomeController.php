@@ -15,4 +15,9 @@ class HomeController extends Controller
     {
         return Inertia::render('Home');
     }
+
+    public function dashboard() : Response
+    {
+        return Inertia::render('Dashboard');
+    }
 }
