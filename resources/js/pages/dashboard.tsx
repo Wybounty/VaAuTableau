@@ -1,7 +1,15 @@
 import { Head } from '@inertiajs/react';
-import React from 'react';
-import { dashboard } from '@/routes';
+import React, { useState } from 'react';
 
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+
+import { dashboard } from '@/routes';
 
 // Get data's eleves
 interface Eleve {
@@ -18,33 +26,76 @@ interface Props {
 
 export default function Dashboard(props: Props) {
 
+    const [open, setOpen] = useState(false);
+    const [eleveSelectionne, setEleveSelectionne] = useState<Eleve | null>(null);
+
     function goToTheBoard() {
         const randomNumber = props.eleves[Math.floor(Math.random() * props.eleves.length)].id;
 
-        console.log(randomNumber);
+        setEleveSelectionne(props.eleves[randomNumber]);
+        setOpen(true);
     }
 
 
     return (
         <>
             <Head title="Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                <div className="flex flex-row items-center justify-between w-full h-20">
-                    <h1>Dashboard</h1>
-                    <button onClick={goToTheBoard}>Go to the board</button>
-                </div>
-                <div className="flex flex-row flex-wrap h-auto flex-1 overflow-hidden rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border" >
-                    {props.eleves.map((eleve) => (
-                        <div key={eleve.id} className="flex flex-col items-center gap-2 w-[200px] h-[200px]">
-                            <img src={eleve.photo} alt={eleve.nom} className="w-[100px] h-[100px] object-cover bg-orange-500" />
-                            <div className="flex flex-col">
-                                <h2 className="text-2xl font-bold">{eleve.nom}</h2>
-                                <p className="text-sm text-gray-500">{eleve.prenom}</p>
-                            </div>
+            <div className="va-page-bg">
+                <div className="va-page">
+                    <header className="va-header-bar">
+                        <div>
+                            <h1 className="va-title">Dashboard</h1>
+                            <p className="va-subtitle va-subtitle-sm">
+                                Votre classe en un coup d'œil
+                                <span className="va-count va-count-inline">{props.eleves.length}</span>
+                            </p>
                         </div>
-                    ))}
+                        <button
+                            className="va-btn va-btn--primary"
+                            onClick={goToTheBoard}
+                        >
+                            🎲 Tirer un élève
+                        </button>
+                    </header>
+
+                    <section className="va-students-grid">
+                        {props.eleves.map((eleve) => (
+                            <article key={eleve.id} className="va-eleve-card">
+                                <div className="va-eleve-photo-wrap">
+                                    <img src={eleve.photo} alt={eleve.nom} className="va-eleve-photo" />
+                                </div>
+                                <div>
+                                    <h2 className="va-eleve-nom">{eleve.nom}</h2>
+                                    <p className="va-eleve-prenom">{eleve.prenom}</p>
+                                </div>
+                            </article>
+                        ))}
+                    </section>
                 </div>
             </div>
+
+
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                    <button className="sr-only">Choisir un élève</button>
+                </DialogTrigger>
+
+                <DialogContent className="va-card">
+                    <DialogHeader>
+                        <DialogTitle className="va-section-title">Élève choisi</DialogTitle>
+                    </DialogHeader>
+
+                    <div className="va-dialog-body">
+                        <div className="va-dialog-photo-wrap">
+                            <img src={eleveSelectionne?.photo} alt={eleveSelectionne?.nom} className="va-dialog-photo" />
+                        </div>
+                        <p className="va-dialog-name">
+                            {eleveSelectionne?.nom} {eleveSelectionne?.prenom}
+                        </p>
+                        <p className="va-eleve-prenom">Voici l'élève sélectionné !</p>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </>
     );
 }

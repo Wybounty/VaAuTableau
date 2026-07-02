@@ -1,0 +1,617 @@
+/* VaauTableau — Thème violet & bleu */
+
+:root {
+    --va-violet: #7c3aed;
+    --va-violet-light: #a78bfa;
+    --va-violet-dark: #5b21b6;
+    --va-blue: #3b82f6;
+    --va-blue-light: #60a5fa;
+    --va-blue-dark: #1d4ed8;
+    --va-indigo: #4f46e5;
+    --va-surface: rgba(255, 255, 255, 0.08);
+    --va-surface-strong: rgba(255, 255, 255, 0.14);
+    --va-border: rgba(167, 139, 250, 0.35);
+    --va-text: #f8fafc;
+    --va-text-muted: #c4b5fd;
+    --va-shadow: 0 25px 50px -12px rgba(49, 46, 129, 0.45);
+    --va-radius: 1rem;
+}
+
+/* ── Arrière-plans ── */
+
+.va-gradient-bg {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(
+        145deg,
+        #0f0a2e 0%,
+        #1e1b4b 30%,
+        #312e81 55%,
+        #1e3a8a 80%,
+        #172554 100%
+    );
+    overflow: hidden;
+}
+
+.va-gradient-bg::before,
+.va-gradient-bg::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.va-gradient-bg::before {
+    width: 520px;
+    height: 520px;
+    top: -120px;
+    right: -80px;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.55) 0%, transparent 70%);
+    animation: va-float 9s ease-in-out infinite;
+}
+
+.va-gradient-bg::after {
+    width: 440px;
+    height: 440px;
+    bottom: -100px;
+    left: -60px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%);
+    animation: va-float 11s ease-in-out infinite reverse;
+}
+
+.va-page-bg {
+    position: relative;
+    min-height: 100%;
+    background: linear-gradient(
+        160deg,
+        rgba(124, 58, 237, 0.06) 0%,
+        rgba(79, 70, 229, 0.04) 40%,
+        rgba(59, 130, 246, 0.06) 100%
+    );
+}
+
+.va-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.va-orb--violet {
+    width: 280px;
+    height: 280px;
+    background: rgba(124, 58, 237, 0.25);
+    top: 10%;
+    left: 5%;
+    animation: va-float 8s ease-in-out infinite;
+}
+
+.va-orb--blue {
+    width: 220px;
+    height: 220px;
+    background: rgba(59, 130, 246, 0.22);
+    bottom: 15%;
+    right: 8%;
+    animation: va-float 10s ease-in-out infinite reverse;
+}
+
+@keyframes va-float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-24px) scale(1.05); }
+}
+
+/* ── Conteneurs ── */
+
+.va-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: 1.5rem;
+}
+
+.va-page {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0.5rem;
+}
+
+/* ── Typographie ── */
+
+.va-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--va-violet-light) 0%, #fff 50%, var(--va-blue-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.va-subtitle {
+    font-size: 1.05rem;
+    color: var(--va-text-muted);
+    line-height: 1.6;
+    max-width: 36rem;
+}
+
+.va-section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #4c1d95;
+}
+
+.dark .va-section-title {
+    color: var(--va-violet-light);
+}
+
+/* ── Cartes ── */
+
+.va-card {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(124, 58, 237, 0.15);
+    border-radius: var(--va-radius);
+    box-shadow: var(--va-shadow);
+    backdrop-filter: blur(12px);
+}
+
+.dark .va-card {
+    background: rgba(30, 27, 75, 0.75);
+    border-color: var(--va-border);
+}
+
+.va-glass-card {
+    background: var(--va-surface);
+    border: 1px solid var(--va-border);
+    border-radius: var(--va-radius);
+    backdrop-filter: blur(16px);
+    box-shadow: var(--va-shadow);
+}
+
+.va-header-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--va-radius);
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.12) 0%, rgba(59, 130, 246, 0.1) 100%);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.dark .va-header-bar {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(59, 130, 246, 0.15) 100%);
+    border-color: var(--va-border);
+}
+
+/* ── Boutons ── */
+
+.va-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.35rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 0.625rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    text-decoration: none;
+}
+
+.va-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.va-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.va-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.va-btn--primary {
+    color: #fff;
+    background: linear-gradient(135deg, var(--va-violet) 0%, var(--va-indigo) 50%, var(--va-blue) 100%);
+    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+}
+
+.va-btn--primary:hover:not(:disabled) {
+    box-shadow: 0 12px 32px rgba(124, 58, 237, 0.55);
+}
+
+.va-btn--outline {
+    color: var(--va-text);
+    background: transparent;
+    border: 1.5px solid var(--va-border);
+    backdrop-filter: blur(8px);
+}
+
+.va-btn--outline:hover:not(:disabled) {
+    background: var(--va-surface-strong);
+    border-color: var(--va-violet-light);
+}
+
+.va-btn--lg {
+    padding: 0.85rem 1.75rem;
+    font-size: 1rem;
+    border-radius: 0.75rem;
+}
+
+/* ── Grille élèves ── */
+
+.va-students-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.25rem;
+    padding: 1.5rem;
+    border-radius: var(--va-radius);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(124, 58, 237, 0.12);
+}
+
+.dark .va-students-grid {
+    background: rgba(15, 10, 46, 0.4);
+    border-color: var(--va-border);
+}
+
+.va-eleve-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1rem;
+    border-radius: 0.875rem;
+    background: #fff;
+    border: 1px solid rgba(124, 58, 237, 0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.dark .va-eleve-card {
+    background: rgba(49, 46, 129, 0.5);
+    border-color: var(--va-border);
+}
+
+.va-eleve-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(124, 58, 237, 0.2);
+    border-color: rgba(124, 58, 237, 0.35);
+}
+
+.va-eleve-photo-wrap {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--va-violet) 0%, var(--va-blue) 100%);
+}
+
+.va-eleve-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+
+.dark .va-eleve-photo {
+    border-color: #1e1b4b;
+}
+
+.va-eleve-nom {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #312e81;
+    text-align: center;
+}
+
+.dark .va-eleve-nom {
+    color: var(--va-text);
+}
+
+.va-eleve-prenom {
+    font-size: 0.85rem;
+    color: #6b7280;
+    text-align: center;
+}
+
+.dark .va-eleve-prenom {
+    color: var(--va-text-muted);
+}
+
+/* ── Formulaire ── */
+
+.va-form-card {
+    padding: 1.75rem;
+    border-radius: var(--va-radius);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(124, 58, 237, 0.15);
+    box-shadow: var(--va-shadow);
+}
+
+.dark .va-form-card {
+    background: rgba(30, 27, 75, 0.75);
+    border-color: var(--va-border);
+}
+
+.va-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.va-input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 0.625rem;
+    border: 1.5px solid rgba(124, 58, 237, 0.2);
+    background: #fff;
+    color: #1e1b4b;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+}
+
+.dark .va-input {
+    background: rgba(15, 10, 46, 0.6);
+    border-color: var(--va-border);
+    color: var(--va-text);
+}
+
+.va-input:focus {
+    border-color: var(--va-violet);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+}
+
+.va-input::file-selector-button {
+    margin-right: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border: none;
+    border-radius: 0.375rem;
+    background: linear-gradient(135deg, var(--va-violet) 0%, var(--va-blue) 100%);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.va-error {
+    font-size: 0.8rem;
+    color: #ef4444;
+    margin-top: -0.5rem;
+}
+
+/* ── Dialog ── */
+
+.va-dialog-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0 1rem;
+    text-align: center;
+}
+
+.va-dialog-photo-wrap {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(135deg, var(--va-violet) 0%, var(--va-blue) 100%);
+}
+
+.va-dialog-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.va-dialog-name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--va-violet) 0%, var(--va-blue) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ── Page d'accueil ── */
+
+.va-home-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 0;
+}
+
+.va-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--va-text);
+    text-decoration: none;
+}
+
+.va-logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.625rem;
+    background: linear-gradient(135deg, var(--va-violet) 0%, var(--va-blue) 100%);
+    font-size: 1.1rem;
+}
+
+.va-home-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 1rem 3rem;
+    gap: 1.25rem;
+}
+
+.va-home-hero .va-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    max-width: 20ch;
+}
+
+.va-home-hero .va-subtitle {
+    max-width: 42rem;
+    font-size: 1.15rem;
+}
+
+.va-home-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.va-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    padding: 2rem 0 3rem;
+}
+
+.va-feature-card {
+    padding: 1.75rem;
+    border-radius: var(--va-radius);
+    background: var(--va-surface);
+    border: 1px solid var(--va-border);
+    backdrop-filter: blur(12px);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.va-feature-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--va-violet-light);
+}
+
+.va-feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.3) 0%, rgba(59, 130, 246, 0.3) 100%);
+}
+
+.va-feature-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--va-text);
+    margin-bottom: 0.5rem;
+}
+
+.va-feature-desc {
+    font-size: 0.9rem;
+    color: var(--va-text-muted);
+    line-height: 1.55;
+}
+
+.va-home-footer {
+    text-align: center;
+    padding: 2rem 0 1.5rem;
+    border-top: 1px solid var(--va-border);
+    color: var(--va-text-muted);
+    font-size: 0.85rem;
+}
+
+/* ── Layout deux colonnes (page élèves) ── */
+
+.va-two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .va-two-col {
+        grid-template-columns: 1fr 1.6fr;
+    }
+}
+
+.va-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--va-violet-light);
+    background: rgba(124, 58, 237, 0.2);
+    border: 1px solid var(--va-border);
+    margin-bottom: 0.5rem;
+}
+
+.va-nav-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.va-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.75rem;
+    height: 1.75rem;
+    padding: 0 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, var(--va-violet) 0%, var(--va-blue) 100%);
+}
+
+.va-subtitle-sm {
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.va-page-bg .va-subtitle {
+    color: #6b7280;
+}
+
+.dark .va-page-bg .va-subtitle {
+    color: var(--va-text-muted);
+}
+
+.va-count-inline {
+    margin-left: 0.5rem;
+}
+
+.va-header-spaced {
+    margin-bottom: 1rem;
+}
+
+.va-class-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
